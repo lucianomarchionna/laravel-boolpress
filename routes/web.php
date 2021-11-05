@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.home');
-});
+Route::get('/', 'HomeController@index')->name('index'); //rotta visibile solo agli utenti
 
+//rotte che gestiscono l'autenticazione
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('admin');
+//rotte che gestiscono il back office
+Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')
+    ->group(function() {
+        Route::get('/', 'HomeController@index')->name('index');
+    });
