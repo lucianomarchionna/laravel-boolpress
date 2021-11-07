@@ -43,6 +43,17 @@ class PostController extends Controller
         $new_post -> fill($form_data);
 
         $slug = Str::slug($new_post->title);
+
+        $slug_present = Post::where('slug', $slug)->first();
+        
+        $cont = 1;
+
+        while($slug_present){
+            $slug = $slug . " - " . $cont;
+            $slug_present = Post::where('slug', $slug)->first();
+            $cont++;
+        }
+
         $new_post->slug = $slug;
         $new_post -> save();
         return redirect() -> route('admin.posts.index') -> with('inserted', 'Il post è stato creato correttamento!');
