@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>Modifica il Post</h1>
-                <form action="{{ route('admin.posts.store'), $post['id'] }}" method="post">
+                <form action="{{ route('admin.posts.update', $post['id'] )}}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
