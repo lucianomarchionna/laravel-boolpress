@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'HomeController@index')->name('index'); //rotta visibile solo agli utenti
 
+//rotta che gestirà i post per l'utente generico
+Route::resource('/posts', 'PostController');
+
 //rotte che gestiscono l'autenticazione
 Auth::routes();
 
