@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>Scrivi un nuovo Post</h1>
-                <form action="{{ route('admin.posts.store') }}">
+                <form action="{{ route('admin.posts.store') }}" method="post">
                     @csrf
                     @method('POST')
                     <div class="form-group">
