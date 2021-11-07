@@ -76,12 +76,15 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post  $post)
     {
-        //
+        if(!$post){
+            abort(404);
+        }
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**

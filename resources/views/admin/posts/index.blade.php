@@ -18,7 +18,7 @@
                     <td>{{$post['slug']}}</td>
                     <td>
                         <a href="{{ route('admin.posts.show', $post['id']) }}" class="btn btn-info">Details</a>
-                        <a href="" class="btn btn-secondary">Modify</a>
+                        <a href="{{ route('admin.posts.edit', $post['id']) }}" class="btn btn-secondary">Modify</a>
                         <form class="d-inline-block" style="display: inline" method="post" action="">
                             @csrf
                             @method('DELETE')
