@@ -15,7 +15,7 @@ class AddForeignKeyPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id')->nullable()->after('slug');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,7 @@ class AddForeignKeyPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign('posts_category_id_foreign');
             $table->dropColumn('category_id');
         });
     }
