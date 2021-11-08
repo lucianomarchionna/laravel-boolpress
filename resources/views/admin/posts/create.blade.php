@@ -24,10 +24,13 @@
                     </div>
                     <div class="form-group">
                         <label for="category_id">Categoria</label>
-                        <select name="category_id" id="category_id" class="form-control">
+                        <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
                             <option value="">Seleziona la categoria</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                <option value="{{ $category['id'] }}"
+                                    {{ old('category_id') == $category['id'] ? 'selected' : null }}    
+                                    >{{ $category['name'] }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

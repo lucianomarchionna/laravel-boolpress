@@ -42,7 +42,8 @@ class PostController extends Controller
     {
         $request -> validate([
             'title' => 'required|max:255',
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         $form_data = $request->all();
@@ -91,7 +92,10 @@ class PostController extends Controller
         if(!$post){
             abort(404);
         }
-        return view('admin.posts.edit', compact('post'));
+
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
