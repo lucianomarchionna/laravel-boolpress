@@ -144,6 +144,7 @@ class PostController extends Controller
         else{
             $post->tags()->sync([]);
         }
+        
         return redirect() -> route('admin.posts.index') -> with('updated', 'Post aggiornato correttamente');
     }
 
