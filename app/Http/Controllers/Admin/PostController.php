@@ -45,7 +45,8 @@ class PostController extends Controller
         $request -> validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'exists:tags,id'
         ]);
 
         $form_data = $request->all();
@@ -66,6 +67,7 @@ class PostController extends Controller
 
         $new_post->slug = $slug;
         $new_post -> save();
+        $new_post -> tags()->attach($form_data['tags']);
         return redirect() -> route('admin.posts.index') -> with('inserted', 'Il post è stato creato correttamento!');
     }
 
@@ -143,7 +145,8 @@ class PostController extends Controller
      */
     public function destroy(Post  $post)
     {
-        $post -> delete();
+        $post->tags()->detach($post['id']);
+        $post->delete();
         return redirect() -> route('admin.posts.index') -> with('deleted', 'Il post è stato eliminato');
     }
 }
