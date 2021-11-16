@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>Scrivi un nuovo Post</h1>
-                <form action="{{ route('admin.posts.store') }}" method="post">
+                <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="form-group">
@@ -21,6 +21,10 @@
                         @error('content')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block" for="image">Immagine</label>
+                        <input type="file" id="image" name="image">
                     </div>
                     <div class="form-group">
                         <label for="category_id">Categoria</label>
